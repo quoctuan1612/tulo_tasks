@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package tulo.common.v1;
+
+message CommonDeleteResponse {
+  google.protobuf.BoolValue message = 1;
+}

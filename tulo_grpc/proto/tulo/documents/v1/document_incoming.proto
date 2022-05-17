@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.documents.v1;
+
+service DocumentIncomingService {
+  rpc GetDocumentsIncoming (google.protobuf.Empty) returns (DocumentsIncomingResponse);
+
+  rpc UpsertDocumentIncoming (UpsertDocumentIncomingRequest) returns (UpsertDocumentIncomingResponse);
+
+  rpc GetDocumentIncomingById (DocumentIncomingIdRequest) returns (DocumentIncomingResponse) {};
+
+  rpc DeleteDocumentIncomingById (DocumentIncomingIdRequest) returns (tulo.common.v1.CommonDeleteResponse) {};
+}
+
+message DocumentsIncomingResponse {
+  repeated DocumentIncoming documents_incoming = 1;
+}
+
+message UpsertDocumentIncomingRequest {
+  DocumentIncoming document_incoming = 1;
+}
+
+message UpsertDocumentIncomingResponse {
+  DocumentIncoming document_incoming = 1;
+}
+
+message DocumentIncomingIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message DocumentIncomingResponse {
+  DocumentIncoming document_incoming = 1;
+}
+
+message DocumentIncoming {
+  google.protobuf.Int64Value id = 1; // Document Incoming ID
+  google.protobuf.StringValue document_name = 2; // Document Name
+  google.protobuf.Int64Value document_type_id = 3; // Document Type ID
+  google.protobuf.Int64Value document_destination_id = 4; // Document Destination ID
+  google.protobuf.StringValue abstract = 5; // Abstract
+  google.protobuf.StringValue file_path = 6; // File Path
+  google.protobuf.StringValue file_name = 7; // File Name
+  google.protobuf.StringValue created_at = 8; // Created At
+  google.protobuf.StringValue updated_at = 9; // Updated At
+}

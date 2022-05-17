@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.common.v1;
+
+service RoleService {
+  rpc GetRoles (google.protobuf.Empty) returns (RolesResponse);
+
+  rpc UpsertRole (UpsertRoleRequest) returns (UpsertRoleResponse);
+
+  rpc GetRoleById (RoleIdRequest) returns (RoleResponse) {};
+
+  rpc DeleteRoleById (RoleIdRequest) returns (v1.CommonDeleteResponse) {};
+}
+
+message RolesResponse {
+  repeated Role roles = 1;
+}
+
+message UpsertRoleRequest {
+  Role role = 1;
+}
+
+message UpsertRoleResponse {
+  Role role = 1;
+}
+
+message RoleIdRequest {
+  google.protobuf.StringValue role_id = 1;
+}
+
+message RoleResponse {
+  Role role = 1;
+}
+
+message Role {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue role_id = 2; // Role ID
+  google.protobuf.StringValue role_name = 3; // Role Name
+  google.protobuf.StringValue description = 4; // Description
+  google.protobuf.StringValue created_at = 5; // Created At
+  google.protobuf.StringValue updated_at = 6; // Updated At
+}

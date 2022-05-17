@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.departments.v1;
+
+service DepartmentService {
+  rpc GetDepartments (google.protobuf.Empty) returns (DepartmentsResponse);
+
+  rpc UpsertDepartment (UpsertDepartmentRequest) returns (UpsertDepartmentResponse);
+
+  rpc GetDepartmentById (DepartmentIdRequest) returns (DepartmentResponse) {};
+
+  rpc DeleteDepartmentById (DepartmentIdRequest) returns (tulo.common.v1.CommonDeleteResponse) {};
+}
+
+message DepartmentsResponse {
+  repeated Department departments = 1;
+}
+
+message UpsertDepartmentRequest {
+  Department department = 1;
+}
+
+message UpsertDepartmentResponse {
+  Department department = 1;
+}
+
+message DepartmentIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message DepartmentResponse {
+  Department department = 1;
+}
+
+message Department {
+  google.protobuf.Int64Value id = 1; // Department ID
+  google.protobuf.StringValue department_name = 2; // Department Name
+  google.protobuf.Int64Value parent_department_id = 3; // Parent Department ID
+  google.protobuf.Int64Value mgr_id = 4; // Manager ID
+  google.protobuf.StringValue description = 5; // Description
+  google.protobuf.StringValue created_at = 6; // Created At
+  google.protobuf.StringValue updated_at = 7; // Updated At
+}

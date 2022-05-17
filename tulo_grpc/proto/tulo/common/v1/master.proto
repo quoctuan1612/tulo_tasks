@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+package tulo.common.v1;
+
+service MasterService {
+  // --
+  // common_003 Get Countries, Provinces and Districts
+  // --
+  rpc GetCountriesProvincesDistricts (google.protobuf.Empty) returns (CountriesProvincesDistrictsResponse);
+
+  // --
+  // common_004 Get Wards By District ID
+  // --
+  rpc GetWardsByDistrictId (DistrictIdRequest) returns (WardsResponse);
+}
+
+message CountriesProvincesDistrictsResponse {
+  repeated Country countries = 1;
+  repeated Province provinces = 2;
+  repeated District districts = 3;
+}
+
+message DistrictIdRequest {
+  google.protobuf.Int64Value district_id = 1;
+}
+
+message WardsResponse {
+  repeated Ward wards = 1;
+}
+
+message Country {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue name = 2; // Name
+  google.protobuf.Int64Value code = 3; // Code
+  google.protobuf.StringValue code_name = 4; // Code Name
+  google.protobuf.Int64Value phone_code = 5; // Phone Code
+}
+
+message Province {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue name = 2; // Name
+  google.protobuf.Int64Value code = 3; // Code
+  google.protobuf.StringValue code_name = 4; // Code Name
+  google.protobuf.StringValue  division_type = 5; // Division Type
+  google.protobuf.Int64Value phone_code = 6; // Phone Code
+  google.protobuf.Int64Value master_country_id = 7; // Country ID
+}
+
+message District {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue name = 2; // Name
+  google.protobuf.Int64Value code = 3; // Code
+  google.protobuf.StringValue code_name = 4; // Code Name
+  google.protobuf.StringValue division_type = 5; // Division Type
+  google.protobuf.StringValue short_code_name = 6; // Short Code Name
+  google.protobuf.Int64Value master_province_id = 7; // Province ID
+}
+
+message Ward {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue name = 2; // Name
+  google.protobuf.Int64Value code = 3; // Code
+  google.protobuf.StringValue code_name = 4; // Code Name
+  google.protobuf.StringValue division_type = 5; // Division Type
+  google.protobuf.StringValue short_code_name = 6; // Short Code Name
+  google.protobuf.Int64Value master_district_id = 7; // District ID
+}

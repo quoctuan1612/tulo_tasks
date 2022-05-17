@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+package tulo.documents.v1;
+
+service DocumentTypeService {
+  rpc GetDocumentTypes (google.protobuf.Empty) returns (DocumentTypesResponse);
+
+  rpc GetDocumentTypeById (DocumentTypeIdRequest) returns (DocumentTypeResponse) {};
+}
+
+message DocumentTypesResponse {
+  repeated DocumentType document_types = 1;
+}
+
+message DocumentTypeIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message DocumentTypeResponse {
+  DocumentType document_type = 1;
+}
+
+message DocumentType {
+  google.protobuf.Int64Value id = 1; // Document Type ID
+  google.protobuf.StringValue document_type_name = 2; // Document Type Name
+  google.protobuf.StringValue description = 3; // Description
+}

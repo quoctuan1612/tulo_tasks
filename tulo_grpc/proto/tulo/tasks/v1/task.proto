@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.tasks.v1;
+
+service TaskService {
+  rpc GetTasks (google.protobuf.Empty) returns (TasksResponse);
+
+  rpc UpsertTask (UpsertTaskRequest) returns (UpsertTaskResponse);
+
+  rpc GetTaskById (TaskIdRequest) returns (TaskResponse) {};
+
+  rpc DeleteTaskById (TaskIdRequest) returns (tulo.common.v1.CommonDeleteResponse) {};
+}
+
+message Task {
+  google.protobuf.Int64Value id = 1; // Task ID
+  google.protobuf.Int64Value document_incoming_id = 2; // Document Incoming Id
+  google.protobuf.Int64Value department_id = 3; // Department Id
+  google.protobuf.Int64Value employee_id = 4; // Employee Id
+  google.protobuf.StringValue start_date = 5; // Start Date
+  google.protobuf.StringValue end_date = 6; // End Date
+  google.protobuf.BoolValue is_complete = 7; // Is Complete
+  google.protobuf.StringValue status = 8; // Status
+  google.protobuf.StringValue created_at = 9; // Created At
+  google.protobuf.StringValue updated_at = 10; // Updated At
+}
+  

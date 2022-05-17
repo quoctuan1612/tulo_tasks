@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.common.v1;
+
+service PermissionService {
+  rpc GetPermissions (google.protobuf.Empty) returns (PermissionsResponse);
+
+  rpc UpsertPermission (UpsertPermissionRequest) returns (UpsertPermissionResponse);
+
+  rpc GetPermissionById (PermissionIdRequest) returns (PermissionResponse);
+
+  rpc DeletePermissionById (PermissionIdRequest) returns (v1.CommonDeleteResponse) {};
+}
+
+message PermissionsResponse {
+  repeated Permission permissions = 1;
+}
+
+message UpsertPermissionRequest {
+  Permission permission = 1;
+  repeated PermissionDetail permission_details = 2;
+}
+
+message UpsertPermissionResponse {
+  Permission permission = 1;
+  repeated PermissionDetail permission_details = 2;
+}
+
+message PermissionIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message PermissionResponse {
+  Permission permission = 1;
+  repeated PermissionDetail permission_details = 2;
+}
+
+message Permission {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.StringValue role_id = 2; // Role ID
+  google.protobuf.StringValue description = 3; // Description
+  google.protobuf.StringValue created_at = 4; // Created At
+  google.protobuf.StringValue updated_at = 5; // Updated At
+}
+
+message PermissionDetail {
+  google.protobuf.Int64Value id = 1; // ID
+  google.protobuf.Int64Value permission_id = 2; // Permission Id
+  google.protobuf.StringValue permission_name = 3; // Permission Name
+  google.protobuf.StringValue permission = 4; // Permission
+  google.protobuf.BoolValue is_active = 5; // Is Avtice
+  google.protobuf.StringValue created_at = 6; // Created At
+  google.protobuf.StringValue updated_at = 7; // Updated At
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.employees.v1;
+
+service EmployeeService {
+  rpc GetEmployees (google.protobuf.Empty) returns (EmployeesResponse);
+
+  rpc UpsertEmployee (UpsertEmployeeRequest) returns (UpsertEmployeeResponse);
+
+  rpc GetEmployeeById (EmployeeIdRequest) returns (EmployeeResponse) {};
+
+  rpc DeleteEmployeeById (EmployeeIdRequest) returns (tulo.common.v1.CommonDeleteResponse) {};
+}
+
+message EmployeesResponse {
+  repeated Employee employees = 1;
+}
+
+message UpsertEmployeeRequest {
+  Employee employee = 1;
+}
+
+message UpsertEmployeeResponse {
+  Employee employee = 1;
+}
+
+message EmployeeIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message EmployeeResponse {
+  Employee employee = 1;
+}
+
+message Employee {
+  google.protobuf.Int64Value id = 1; // Employee ID
+  google.protobuf.StringValue first_name = 2; // First Name
+  google.protobuf.StringValue last_name = 3; // Last Name
+  google.protobuf.StringValue gender = 4; // Gender
+  google.protobuf.StringValue dob = 5; // Date of Birth
+  google.protobuf.StringValue email = 6; // Email
+  google.protobuf.StringValue phone = 7; // Phone
+  google.protobuf.Int64Value master_country_id = 8; // Country ID
+  google.protobuf.Int64Value master_province_id = 9; // Province ID
+  google.protobuf.Int64Value master_district_id = 10; // District ID
+  google.protobuf.Int64Value master_ward_id = 11; // Ward ID
+  google.protobuf.Int64Value owner_id = 12; // Owner ID
+  google.protobuf.Int64Value department_id = 13; // Department ID
+  google.protobuf.StringValue role_id = 14; // Role ID
+  google.protobuf.StringValue created_at = 15; // Created At
+  google.protobuf.StringValue updated_at = 16; // Updated At
+}

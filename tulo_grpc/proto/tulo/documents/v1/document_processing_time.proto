@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "tulo/common/v1/response.proto";
+
+package tulo.documents.v1;
+
+service DocumentProcessingTimeService {
+  rpc GetDocumentProcessingTimes (google.protobuf.Empty) returns (DocumentProcessingTimesResponse);
+
+  rpc UpsertDocumentProcessingTime (UpsertDocumentProcessingTimeRequest) returns (UpsertDocumentProcessingTimeResponse);
+
+  rpc GetDocumentProcessingTimeById (DocumentProcessingTimeIdRequest) returns (DocumentProcessingTimeResponse) {};
+
+  rpc DeleteDocumentProcessingTimeById (DocumentProcessingTimeIdRequest) returns (tulo.common.v1.CommonDeleteResponse) {};
+}
+
+message DocumentProcessingTimesResponse {
+  repeated DocumentProcessingTime document_processing_times = 1;
+}
+
+message UpsertDocumentProcessingTimeRequest {
+  DocumentProcessingTime document_processing_time = 1;
+}
+
+message UpsertDocumentProcessingTimeResponse {
+  DocumentProcessingTime document_processing_time = 1;
+}
+
+message DocumentProcessingTimeIdRequest {
+  google.protobuf.Int64Value id = 1;
+}
+
+message DocumentProcessingTimeResponse {
+  DocumentProcessingTime document_processing_time = 1;
+}
+
+message DocumentProcessingTime {
+  google.protobuf.Int64Value id = 1; // Document Processing Time ID
+  google.protobuf.Int64Value document_type_id = 2; // Document Type ID
+  google.protobuf.Int64Value document_destination_id = 3; // Document Destination ID
+  google.protobuf.Int32Value processing_time = 4; // Processing Time
+  google.protobuf.StringValue created_at = 5; // Created At
+  google.protobuf.StringValue updated_at = 6; // Updated At
+}
