@@ -1,0 +1,7 @@
+vi:
+  errors:
+    messages:
+      task:
+        record_not_found: Không tìm thấy công việc theo mã công việc %{id}
+      report:
+        record_not_found: Không tìm thấy báo cáo theo mã báo cáo %{id}
